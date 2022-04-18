@@ -1,7 +1,8 @@
 import sys
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponse
 from django.template import loader
 from django.shortcuts import render, redirect
+from .forms import CaptchaTestForm
 from .models import Video
 
 
@@ -37,3 +38,17 @@ def handler404(request, exception):
 def vido_template(request):
     video = Video.objects.all()
     return render(request, 'video_template.html', {'video': video})
+
+
+def some_view(request):
+    if request.POST:
+        form = CaptchaTestForm(request.POST)
+
+        if form.is_valid():
+            return HttpResponse("Captchada muvafffaqiyatli o'tdingiz")
+        else:
+            return HttpResponse("Captcha xato |!!")
+
+    form = CaptchaTestForm()
+
+    return render(request, 'captcha.html', {'form': form})
