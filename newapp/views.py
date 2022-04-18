@@ -1,6 +1,8 @@
 import sys
-
-from django.shortcuts import render
+from django.http import HttpResponseNotFound
+from django.template import loader
+from django.shortcuts import render, redirect
+from .models import Video
 
 
 # Create your views here.
@@ -25,3 +27,13 @@ def index_page(request):
             return render(request, 'index.html', {'code': codearetedata, 'output': output})
 
     return render(request, 'index.html')
+
+
+def handler404(request, exception):
+    context = {}
+    return render(request, '404.html', context)
+
+
+def vido_template(request):
+    video = Video.objects.all()
+    return render(request, 'video_template.html', {'video': video})
