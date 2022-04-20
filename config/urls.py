@@ -22,6 +22,7 @@ handler404 = 'app.newapp.views.handler404'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.newapp.urls')),
+    path('', include('app.todo.urls')),
     path('captchat/', include('captcha.urls')),
 ]
 

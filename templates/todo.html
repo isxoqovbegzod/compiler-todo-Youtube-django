@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'index.html' %}
 
-</body>
-</html>
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="container mt-4">
+            <div class="input-group mb-3 mt-3">
+                <input type="text" class="form-control" name="word">
+                <button type="submit" class="btn btn-success">Add</button>
+            </div>
+        </div>
+    </form>
+    <div class="container mt-2">
+        {% for todo in user %}
+            <input placeholder="{{ todo.todo }}"><br><br>
+            <a href="update/{{ todo.user }}/{{ todo.id }}" class="btn btn-success mb-4">Yangilash</a>
+            <a href="delete/{{ todo.user }}/{{ todo.id }}" class="btn btn-danger mb-4">O'chirish</a><br>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+
+
