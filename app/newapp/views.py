@@ -45,9 +45,11 @@ def some_view(request):
         form = CaptchaTestForm(request.POST)
 
         if form.is_valid():
-            return HttpResponse("Captchada muvafffaqiyatli o'tdingiz")
+            return HttpResponse("Captchada muvaffaqiyatli o'tdingiz")
         else:
-            return HttpResponse("Captcha xato |!!")
+            form = CaptchaTestForm()
+            forms = 'Xato kirgazildi  qayta urining '
+            return render(request, 'captcha.html', {'forms': forms, 'form': form})
 
     form = CaptchaTestForm()
 
